@@ -51,6 +51,7 @@ function renderCities() {
     }
     else {
         getCurrentWeather(city)
+        renderforecast(city);
     };
 }
 
@@ -80,8 +81,6 @@ function getCurrentWeather(cityName) {
 
         cityTitle = $("<h3>").text(response.name + " // " + " " + FormatDay());
         $("#today-weather").append(cityTitle);
-
-        //need to insert weather icon here
 
         var TempetureToNum = parseInt((response.main.temp) * 9 / 5 - 459);
         var cityTemperature = $("<p>").text("Tempeture: " + TempetureToNum + "°F");
@@ -125,33 +124,31 @@ function getCurrentWeather(cityName) {
             }
         });
 
-debugger
-        //get 5-day forecast function
-        function renderforecast(cityName) {
-            var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&appid=" + key;
-            $("#forecast").empty();
-            $.ajax({
-                url: queryURL3,
-                method: "GET"
-            }).then(function (response5day) {
-                var fiveDate = $("<h4>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
-                var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
-                var colFive = $("<div>").addClass("col-md-2");
-                var cardFive = $("<div>").addClass("card bg-primary text-white");
-                var cardBodyFive = $("<div>").addClass("card-body p-2");
-                var humidFive = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
-                var tempFive = $("<p>").addClass("card-text").text("Temperature: " + data.list[i].main.temp + " °F");
+      });
+    }
+    
+//get 5-day forecast function
+function renderforecast(cityName) {
+    var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&appid=" + key;
+    $("#forecast").empty();
+    $.ajax({
+        url: queryURL3,
+        method: "GET"
+    }).then(function (data) {
+      $("#forecast").append("<div class=\"row\">");
+      for (var i = 0; i < 5; i++) {
+            var fiveDate = $("<h4>").addClass("card-text").text(new Date(data.list[i].dt_txt).toLocaleDateString());
+            var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+            var colFive = $("<div>").addClass("card-body");
+            var cardFive = $("<div>").addClass("card-md-2 bg-primary text-white");
+            var cardBodyFive = $("<div>").addClass("card-body p-2");
+            var humidFive = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
+            var tempFive = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp + " °F");
+            // if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
 
-                $("#forecast").html.append("<div class=\"row\">");
-
-                for (var i = 0; i < data.list.length; i++) {
-                    if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
-
-                        colFive.append(cardFive.append(cardBodyFive.append(fiveDate, weatherIcon, tempFive, humidFive)));
-                        $("#forecast.row").append(colFive);
-                    }
-                }
-            });
+                colFive.append(cardFive.append(cardBodyFive.append(fiveDate, weatherIcon, tempFive, humidFive)));
+                $("#forecast > .row").append(colFive);
+            // }
         }
     });
 }
@@ -160,6 +157,7 @@ debugger
 $(document).on("click", "#listC", function () {
     var thisCity = $(this).attr("data-city");
     getCurrentWeather(thisCity);
+    renderforecast(thisCity);
 });
 
 

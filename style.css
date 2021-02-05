@@ -16,6 +16,17 @@
   padding: 12px;
 }
 
+.card-body{
+  width: 181px;
+  margin-right: -25px;
+  margin-left: -5px;
+}
+
+.card-text{
+  padding: 8px;
+  margin-bottom: -10px;
+}
+
 .green{
   background-color: green;
   color: white;
