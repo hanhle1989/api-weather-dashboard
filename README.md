@@ -18,7 +18,7 @@ THEN I am again presented with current and future conditions for that city
 ```
 
 ## Mock-Up
-./Assets/screenshot.png
+![weather dashboard demo](./assets/screenshot.jpg)
 
 ## Links to the deployed applocation
 [GitHub Repository](https://github.com/hanhle1989/api-weather-dashboard)
