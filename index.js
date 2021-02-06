@@ -132,7 +132,7 @@ function getCurrentWeather(cityName) {
 
 //get 5-day forecast function
 function renderforecast(cityName) {
-    var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + key;
+    var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName +  "&appid=" + key + "&units=imperial";
     $("#forecast").empty();
     $.ajax({
         url: queryURL3,
@@ -142,7 +142,7 @@ function renderforecast(cityName) {
         for (var i = 0; i < forecastFive.list.length; i++) {
             if (forecastFive.list[i].dt_txt.indexOf("15:00:00") !== -1) {
             var fiveDate = $("<h4>").addClass("card-text").text(new Date(forecastFive.list[i].dt_txt).toLocaleDateString());
-            
+
             var colFive = $("<div>").addClass("card-body");
             var cardFive = $("<div>").addClass("card-md-2 bg-primary text-white");
             var cardBodyFive = $("<div>").addClass("card-body p-2");
