@@ -19,17 +19,15 @@
 </head>
 
 <body>
-  <div class="container-flex">
-    <h1 class="header">WEATHER DASHBOARD</h1>
-  </div>
-
-  <!-- Search box & search history -->
   <div class="container">
+    <h1 class="header">WEATHER DASHBOARD</h1>
+
+    <!-- Search box & search history -->
     <div class="row">
-      <div class="search-box bg-light">
+      <div class="search-box bg-light" style="width: 280px;">
         <h3>Search for a City:</h3>
         <div class="input-group">
-          <input type="text" class="class=" col-sm-4 col-form-label id="city-input" aria-describedby="basic-addon2">
+          <input type="text" class="col-form-label" id="city-input" aria-describedby="basic-addon2" style="width: 175px;">
 
           <div class="input-group-append">
             <button class="btn btn-primary my-2 my-sm-0" type="submit" id="add-city">Search</button>
@@ -39,14 +37,14 @@
 
         <br></br>
 
-        <div class="card" style="width: 260px;">
+        <div class="card" style="width: 248px;">
           <ul id="city-list" class="list-group list-group-flush">
           </ul>
         </div>
       </div>
 
       <!-- Current weather -->
-      <div class="col-8 forecast">
+      <div class="col-9 forecast">
         <div id="today-weather">
         </div>
 
@@ -71,7 +69,7 @@
     integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
     crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="index.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

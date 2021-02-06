@@ -79,7 +79,7 @@ function getCurrentWeather(cityName) {
         method: "GET"
     }).then(function (response) {
 
-        cityTitle = $("<h3>").text(response.name + " // " + " " + FormatDay());
+        cityTitle = $("<h3>").text(response.name + " (" + new Date().toLocaleDateString() + ")");
         $("#today-weather").append(cityTitle);
 
         var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + response.weather[0].icon + ".png");
@@ -144,7 +144,7 @@ function renderforecast(cityName) {
             var fiveDate = $("<h4>").addClass("card-text").text(new Date(forecastFive.list[i].dt_txt).toLocaleDateString());
 
             var colFive = $("<div>").addClass("card-body");
-            var cardFive = $("<div>").addClass("card-md-2 bg-primary text-white");
+            var cardFive = $("<div>").addClass("card-md-3 bg-primary text-white");
             var cardBodyFive = $("<div>").addClass("card-body p-2");
 
             var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + forecastFive.list[i].weather[0].icon + ".png");

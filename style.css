@@ -1,4 +1,5 @@
 .header{
+  margin-top: 100px;
   margin-left: -15px;
   background-color: rgb(0, 110, 255);
   background-size: 1000px;
@@ -8,7 +9,15 @@
 }
 
 .search-box{
-  padding: 20px;
+  padding: 10px;
+  height: 565px;
+  padding-left: 15px;
+  width: 255px;;
+}
+
+.btn{
+  padding-top: px;
+  margin: 1px;
 }
 
 .forecast{  
@@ -17,8 +26,8 @@
 }
 
 .card-body{
-  width: 181px;
-  margin-right: -25px;
+  width: 180px;
+  margin-right: -10px;
   margin-left: -5px;
 }
 
