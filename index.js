@@ -127,32 +127,35 @@ function getCurrentWeather(cityName) {
             }
         });
 
-      });
-    }
-    
+    });
+}
+
 //get 5-day forecast function
 function renderforecast(cityName) {
-    var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&appid=" + key;
+    var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + key;
     $("#forecast").empty();
     $.ajax({
         url: queryURL3,
         method: "GET"
-    }).then(function (data) {
-      $("#forecast").append("<div class=\"row\">");
-      for (var i = 0; i < 5; i++) {
-            var fiveDate = $("<h4>").addClass("card-text").text(new Date(data.list[i].dt_txt).toLocaleDateString());
-            var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png");
+    }).then(function (forecastFive) {
+        $("#forecast").append("<div class=\"row\">");
+        for (var i = 0; i < forecastFive.list.length; i++) {
+            if (forecastFive.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+            var fiveDate = $("<h4>").addClass("card-text").text(new Date(forecastFive.list[i].dt_txt).toLocaleDateString());
+            
             var colFive = $("<div>").addClass("card-body");
             var cardFive = $("<div>").addClass("card-md-2 bg-primary text-white");
             var cardBodyFive = $("<div>").addClass("card-body p-2");
-            var humidFive = $("<p>").addClass("card-text").text("Humidity: " + data.list[i].main.humidity + "%");
-            var tempFive = $("<p>").addClass("card-text").text("Temp: " + data.list[i].main.temp + " °F");
-            // if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
 
-                colFive.append(cardFive.append(cardBodyFive.append(fiveDate, weatherIcon, tempFive, humidFive)));
-                $("#forecast > .row").append(colFive);
-            // }
+            var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/w/" + forecastFive.list[i].weather[0].icon + ".png");
+            var tempFive = $("<p>").addClass("card-text").text("Temp: " + forecastFive.list[i].main.temp + " °F");
+            var humidFive = $("<p>").addClass("card-text").text("Humidity: " + forecastFive.list[i].main.humidity + "%");
+
+            colFive.append(cardFive.append(cardBodyFive.append(fiveDate, weatherIcon, tempFive, humidFive)));
+            $("#forecast > .row").append(colFive);
+
         }
+    }
     });
 }
 
